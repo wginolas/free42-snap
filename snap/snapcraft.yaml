@@ -17,12 +17,19 @@ architectures:
 grade: stable # must be 'stable' to release into candidate/stable channels
 confinement: strict # use 'strict' once you have the right plugs and slots
 
+slots:
+  dbus-free42:
+    interface: dbus
+    bus: session
+    name: com.thomasokken.free42
+
 apps:
   free42:
     command: free42dec
     extensions: [gnome-3-28]
     #plugs: [unity7, home, pulseaudio]
     plugs: [home]
+    slots: [dbus-free42]
 
 parts:
   free42:
@@ -31,8 +38,5 @@ parts:
     source-tag: v3.0.6
     override-build: |
       ./build-gtk
-      ls packages
       tar xvfz packages/*.tgz
-      ls Free42Linux
       cp Free42Linux/* $SNAPCRAFT_PART_INSTALL
-      ls $SNAPCRAFT_PART_INSTALL
