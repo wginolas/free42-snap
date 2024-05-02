@@ -1,6 +1,6 @@
 name: free42
-base: core18 # the base snap is the execution environment for this snap
-version: "3.1.2" # just for humans, typically '1.2+git' or '1.3.2'
+base: core22 # the base snap is the execution environment for this snap
+version: "3.1.8" # just for humans, typically '1.2+git' or '1.3.2'
 summary: An HP-42S Calculator Simulator
 description: |
   Free42 is a re-implementation of the HP-42S Scientific Programmable Calculator
@@ -26,7 +26,7 @@ slots:
 apps:
   free42:
     command: free42dec
-    extensions: [gnome-3-28]
+    extensions: [gnome]
     #plugs: [unity7, home, pulseaudio]
     plugs: [home]
     slots: [dbus-free42]
@@ -35,7 +35,7 @@ parts:
   free42:
     plugin: make
     source: https://github.com/thomasokken/free42.git
-    source-tag: v3.1.2
+    source-tag: v3.1.8
     override-build: |
       ./build-gtk
       tar xvfz packages/*.tgz
